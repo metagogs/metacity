@@ -1,4 +1,4 @@
-# Goga MetaCity C# Demo
+# Goga MetaCity Unity Demo
 
 [visit online demo](https://metagogs.github.io/metacity/)
 

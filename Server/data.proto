@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+package model;
+option go_package = "/model";
+
+// @gogs:Components
+message Components {
+    BaseWorld BaseWorld = 1;
+}
+
+message BaseWorld {
+    // join the world
+    JoinWorld JoinWorld = 1;
+    // return the join world response
+    JoinWorldSuccess JoinWorldSuccess = 2;
+    // notifiy other player someone join the world
+    JoinWorldNotifiy JoinWorldNotifiy = 3;
+    // update user position and rotation to other player
+    UpdateUserInWorld UpdateUserInWorld = 4;
+    // leave the world and notify other player
+    LeaveWorldNotifiy LeaveWorldNotifiy = 5;
+}
+
+
+message JoinWorld {
+
+}
+
+// @gogs:ServerMessage
+message JoinWorldSuccess {
+    string uid = 1;
+    repeated string uids = 2;
+}
+
+// @gogs:ServerMessage
+message JoinWorldNotifiy {
+   string uid = 1;
+}
+
+message UpdateUserInWorld {
+    string uid = 1;
+    Vecotr3 postion = 2;
+    Rotation rotation = 3;
+}
+
+// @gogs:ServerMessage
+message LeaveWorldNotifiy {
+    string uid = 1;
+}
+
+message Vecotr3{
+    float x = 1;
+    float y = 2;
+    float z = 3;
+}
+  
+message Rotation{
+    float x = 1;
+    float y = 2;
+    float z = 3;
+    float w = 4;
+}
+  

@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: metacity
+  namespace: gogsdemo
+  labels:
+    app: metacity
+spec:
+  containers:
+    - name: gogs-main
+      image: neosu/gogsmetacity:v0.0.1
+      ports:
+        - name: admin-tcp
+          containerPort: 9999
+          protocol: TCP
+        - name: base-tcp
+          containerPort: 8888
+          protocol: TCP
+      resources:
+        limits:
+          cpu: 500m
+          memory: 500Mi
+        requests:
+          cpu: 100m
+          memory: 100Mi
+      readinessProbe:
+        httpGet:
+          path: /health
+          port: 9999
+          scheme: HTTP
+        initialDelaySeconds: 5
+        timeoutSeconds: 1
+        periodSeconds: 5
+        successThreshold: 1
+        failureThreshold: 3
+      imagePullPolicy: IfNotPresent
+  restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: metacity
+  name: metacity-svc
+  namespace: gogsdemo
+spec:
+  ports:
+  - port: 9999
+    targetPort: 9999
+    protocol: TCP
+  - port: 8888
+    targetPort: 8888
+    protocol: TCP
+  selector:
+    app: metacity
+  type: ClusterIP
+

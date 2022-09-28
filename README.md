@@ -1,4 +1,4 @@
-# gogs MetaCity Unity Demo
+# [gogs](https://github.com/metagogs/gogs) MetaCity Unity Demo
 
 [visit online demo](https://metagogs.github.io/metacity/)
 
